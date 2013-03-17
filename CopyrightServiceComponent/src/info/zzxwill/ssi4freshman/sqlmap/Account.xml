@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="account">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="Account"
+		type="info.zzxwill.ssi4freshman.bean.Account" />
+
+	<!-- Result maps describe the mapping between the columns returned
+		from a query, and the class properties.  A result map isn't
+		necessary if the columns (or aliases) match to the properties 
+		exactly. -->
+
+
+	<!-- Select with no parameters using the result map for Account class. -->
+	<select id="selectAllAccounts" resultClass="info.zzxwill.ssi4freshman.bean.Account">
+		select id,firstname,lastname,emailaddress from ACCOUNT
+	</select>
+	
+	<delete id="deleteAccountSen" parameterClass="Integer">
+	   delete from ACCOUNT where id=#Id#
+	</delete>
+	
+	<insert id="addAccount" parameterClass="String">
+	   insert into ACCOUNT(firstname) values(#firstname#)
+	   	</insert>
+	
+   
+
+
+
+</sqlMap>

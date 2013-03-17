@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+
+
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close" dependency-check="none">
+		<property name="driverClass">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>jdbc:oracle:thin:@10.17.199.8:1521:lab1107</value>
+		</property>
+		<property name="user">
+			<value>business</value>
+		</property>
+		<property name="password">
+			<value>business</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>3</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>3</value>
+		</property>
+		<property name="minPoolSize">
+			<value>2</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>50</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>36000</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>900</value>
+		</property>
+		<property name="maxStatements">
+			<value>100</value>
+		</property>
+		<property name="numHelperThreads">
+			<value>10</value>
+		</property>
+	</bean>
+
+	<!--账户管理 -->
+	<bean id="showAccountAction"
+		class="info.zzxwill.ssi4freshman.action.AccountAction"
+		scope="prototype">
+		<property name="accountSerivce" ref="accountService"></property>
+	</bean>
+
+
+	<bean id="accountService"
+		class="info.zzxwill.ssi4freshman.service.AccountService"
+		scope="prototype">
+		<property name="accountDao" ref="accountDao"></property>
+	</bean>
+
+
+	<bean id="accountDao"
+		class="info.zzxwill.ssi4freshman.dao.AccountDao">
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+
+
+	<bean id="deleteAction"
+		class="info.zzxwill.ssi4freshman.action.AccountAction"
+		scope="prototype">
+		<property name="accountSerivce" ref="accountService"></property>
+	</bean>
+
+	<bean id="sqlMapClient"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation"
+			value="classpath:SqlMapConfig.xml">
+		</property>
+	</bean>
+	
+	
+	<bean id="addAccountAction"
+		class="info.zzxwill.ssi4freshman.action.AccountAction"
+		scope="prototype">
+		<property name="accountSerivce" ref="accountService"></property>
+	</bean>
+
+
+
+</beans>

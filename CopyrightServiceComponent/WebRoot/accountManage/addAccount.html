@@ -1,0 +1,36 @@
+<!-- 用于将被嵌入网站的信息传回中心系统的addAccount.jsp页面 -->
+<html>
+<head></head>
+<script type="text/javascript">
+
+	var firstName;
+var hrefstr,pos,parastr,para,tempstr;
+   hrefstr = window.location.href;
+   pos = hrefstr.indexOf("?");
+   parastr = hrefstr.substring(pos+1);
+   para = parastr.split("&");
+   tempstr="";
+   for(i=0;i<para.length;i++)
+   {
+    tempstr = para[i];
+    pos = tempstr.indexOf("=");
+    if(tempstr.substring(0,pos) == "user")
+    {
+     firstName =  tempstr.substring(pos+1);
+    // return;
+     }
+   }
+   
+   var url = "./addAccount.jsp?firstName="+firstName;
+   window.location = url;
+   //response.sendRedirect(url);
+
+
+</script>
+<body>
+	<form name="fr1">
+		你的名字是: <input type="text" name="input"> <input type="button"
+			name="bt1" value="查看用户名" onclick="getname()">
+	</form>
+</body>
+</html>

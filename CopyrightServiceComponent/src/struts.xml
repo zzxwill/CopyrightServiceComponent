@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<!-- !!!!!!!!!!!!!!!!开发模式，更改后直接能看到结果!!!!!!!!!!!!!!!!!!!!!!!!!!!!	-->
+	<constant name="struts.devMode" value="true" />
+
+	<package name="account" extends="struts-default" namespace="/">
+		<!--提交录入的内容-->
+		<action name="showAccount" class="showAccountAction"
+			method="showAccount">
+			<result name="success">
+				/accountManage/showAllAccounts.jsp
+			</result>
+			<result name="error">
+				/index.jsp
+
+			</result>
+
+		</action>
+
+		<action name="delete" class="deleteAction"
+			method="deleteAccount">
+
+			<result name="success">/accountManage/DeS.jsp</result>
+
+			<result name="error">/accountManage/DeF.jsp</result>
+
+		</action>
+		
+		
+		<action name="addAccount" class="addAccountAction"
+			method="addAccount">
+			<result name="success" type="chain">
+				showAccount
+			</result>
+			<result name="error">
+				/index.jsp
+
+			</result>
+
+		</action>
+		
+	</package>
+</struts>
